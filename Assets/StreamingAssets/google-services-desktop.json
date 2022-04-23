@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "383192075651",
+    "firebase_url": "https://dreamstreamvr-d274a-default-rtdb.firebaseio.com",
+    "project_id": "dreamstreamvr-d274a",
+    "storage_bucket": "dreamstreamvr-d274a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383192075651:android:7260606a4a5bb200463ab6",
+        "android_client_info": {
+          "package_name": "com.DavideZhang.DreamStreamVR"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383192075651-on4l7a2q6r3e024br22q5jegsc87a3sv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9nVwBQFyLsVmYlBvD_N85yMiGuKTDTNI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383192075651-on4l7a2q6r3e024br22q5jegsc87a3sv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
