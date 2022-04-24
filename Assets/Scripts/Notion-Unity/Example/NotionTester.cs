@@ -144,7 +144,11 @@ namespace Notion.Unity.Example
         public void SubscribeBrainwaves()
         {
             if (!_notion.IsLoggedIn) return;
-            _notion.Subscribe(new BrainwavesRawHandler());
+
+            //DZ: instantiating modified BrainwavesRawToMeshHandler
+            //_notion.Subscribe(new BrainwavesRawHandler());
+            _notion.Subscribe(new BrainwavesRawToMeshHandler());
+
             Debug.Log("Subscribed to raw brainwaves");
         }
 
