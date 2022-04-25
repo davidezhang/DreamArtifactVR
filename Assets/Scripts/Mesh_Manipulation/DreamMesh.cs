@@ -69,6 +69,10 @@ public class DreamMesh : MonoBehaviour
     float startTime = 0f;
     float runTime = 0f;
 
+    //DZ
+    //new list of radius effect values per vertex index
+    private float[] radiusOfEffectList;
+
     void Start()
     {
         Init();
@@ -80,6 +84,10 @@ public class DreamMesh : MonoBehaviour
         isMeshReady = false;
 
         currentIndex = 0;
+
+        //DZ
+        //instantiate radiusOfEffect List
+        radiusOfEffectList = new float[8];
 
         if (isEditMode)
         {
