@@ -36,6 +36,12 @@ public class VFXUpdateSDF : MonoBehaviour
         m_VFX.SetTexture("meshSDF", m_Baker.SdfTexture);
     }
 
+    public void AccelForce(Vector3 accelVector)
+    {
+        
+        m_VFX.SetVector3("acceleration", accelVector);
+    }
+
     void OnDestroy()
     {
         if (m_Baker != null)

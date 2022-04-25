@@ -9,6 +9,9 @@ namespace Notion.Unity
         public Metrics Metric => Metrics.Accelerometer;
         public string Label => string.Empty;
 
+        //DZ
+        public VFXUpdateSDF vfx;
+
         private readonly StringBuilder _builder;
 
         public AccelerometerHandler()
@@ -27,6 +30,14 @@ namespace Notion.Unity
 
             Debug.Log(_builder.ToString());
             _builder.Clear();
+
+            DataToVFX(accelerometer);
+        }
+
+        private void DataToVFX(Accelerometer accel)
+        {
+            Vector3 accelVector = new Vector3(0, 0, accel.Z*3f);
+            vfx.AccelForce(accelVector);
         }
     }
 }

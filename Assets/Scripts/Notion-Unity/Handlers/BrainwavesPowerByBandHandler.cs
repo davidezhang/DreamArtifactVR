@@ -16,12 +16,13 @@ namespace Notion.Unity
 
         //DZ
         //remapping upper and lower bounds
-        private float _upper = 1f;
+        private float _upper = 4f;
         private float _lower = 0;
 
         public BrainwavesPowerByBandHandler()
         {
             _builder = new StringBuilder();
+
         }
 
         public void Handle(string metricData)
@@ -62,28 +63,33 @@ namespace Notion.Unity
             if (dreamMesh != null)
             {
                 //algorithm that maps power by band data to mesh parameters
-                foreach (decimal item in dt.Delta)
-                {
-                    dreamMesh.MorphMesh(item);
-                }
 
                 for (int i = 0; i < dt.Delta.Length; i++)
                 {
                     //remap per channel power value to range of 0-1
                     //because the upper bound is unknown, it is continuously updated
                     float fValue = (float)dt.Delta[i];
-                    if (fValue > _upper)
+                    float logValue = Mathf.Log(fValue);
+
+                    if (logValue < 0)
                     {
-                        _upper = fValue;
+                        logValue = 1;
                     }
-                    float mappedValue = Remap(fValue, _lower, _upper, 0f, 1f);
+
+                    Debug.Log(logValue);
+
+                    float mappedValue = Remap(logValue, _lower, _upper, 0f, 1f);
 
                     //send mapped value and index (corresp. to vertex index) to DreamMesh.cs
-
+                    //set radiusEffectList values
+                    dreamMesh.radiusOfEffectList[i] = logValue / 20;
+                    //dreamMesh.MorphMesh(dt.Delta[i]);
 
                 }
 
-                
+                dreamMesh.isAnimate = true;
+
+
             }
         }
 

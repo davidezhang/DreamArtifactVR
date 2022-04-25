@@ -8,6 +8,7 @@ namespace Notion.Unity.Example
     public class NotionTester : MonoBehaviour
     {
         public DreamMesh dreamMesh;
+        public VFXUpdateSDF vfx;
 
 
         [SerializeField]
@@ -168,8 +169,15 @@ namespace Notion.Unity.Example
         public void SubscribeAccelerometer()
         {
             if (!_notion.IsLoggedIn) return;
-            _notion.Subscribe(new AccelerometerHandler());
+
+            //DZ
+            AccelerometerHandler accHandler = new AccelerometerHandler();
+
+            _notion.Subscribe(accHandler);
             Debug.Log("Subscribed to accelerometer");
+
+            //DZ
+            accHandler.vfx = vfx;
         }
 
         /// <summary>
@@ -200,6 +208,8 @@ namespace Notion.Unity.Example
 
             //DZ
             pBBHandler.dreamMesh = dreamMesh;
+            //start displacement only when it is subscribing to data
+            pBBHandler.dreamMesh.StartDisplacement();
         }
 
         private async void OnDisable()

@@ -62,16 +62,18 @@ public class DreamMesh : MonoBehaviour
     public float pickSize = 0.01f;
 
     public float radiusOfEffect = 0.3f; //1 
-    public float pullValue = 0.3f; //2
+    public float pullValue; //2
     public float duration; //3
     int currentIndex = 0; //4
-    bool isAnimate = false;
+    [HideInInspector]
+    public bool isAnimate = false;
     float startTime = 0f;
     float runTime = 0f;
 
     //DZ
     //new list of radius effect values per vertex index
-    private float[] radiusOfEffectList;
+    [HideInInspector]
+    public float[] radiusOfEffectList;
 
     void Start()
     {
@@ -114,7 +116,8 @@ public class DreamMesh : MonoBehaviour
                 modifiedVertices[i] = originalVertices[i];
             }
 
-            StartDisplacement();
+            //called by pBB handler instead - only when data is being collected and parameters are ready
+            //StartDisplacement();
         }
 
     }
@@ -123,7 +126,7 @@ public class DreamMesh : MonoBehaviour
     {
         targetVertex = originalVertices[selectedIndices[currentIndex]]; //1
         startTime = Time.time; //2
-        isAnimate = true;
+        //isAnimate = true;
     }
 
     protected void FixedUpdate() //1
@@ -139,7 +142,7 @@ public class DreamMesh : MonoBehaviour
         {
             Vector3 targetVertexPos =
                 meshFilter.transform.InverseTransformPoint(targetVertex);
-            DisplaceVertices(targetVertexPos, pullValue, radiusOfEffect);
+            DisplaceVertices(targetVertexPos, pullValue, radiusOfEffectList[currentIndex]);
         }
         else //5
         {

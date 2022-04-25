@@ -1006,6 +1006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dreamMesh: {fileID: 796764702}
+  vfx: {fileID: 796764701}
   _device: {fileID: 11400000, guid: 05dc5691ff8660b45828cb5f5104047e, type: 2}
   _buttonLogin: {fileID: 740602549}
   _buttonGetDevices: {fileID: 124452471}
@@ -2044,6 +2045,9 @@ VisualEffect:
       - m_Value: {x: 3, y: 3, z: 3}
         m_Name: BoxSize
         m_Overridden: 1
+      - m_Value: {x: 0, y: 0, z: 0}
+        m_Name: acceleration
+        m_Overridden: 0
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -3170,11 +3174,13 @@ MonoBehaviour:
   isMeshReady: 0
   isEditMode: 0
   showTransformHandle: 1
-  selectedIndices: 36010000c90000000c0100000d000000a7010000da0100006e010000f3010000f7000000b8000000
+  selectedIndices: f100000094010000e4000000ee000000d5000000db0000006f000000d6000000
   pickSize: 0.01
   radiusOfEffect: 0.3
-  pullValue: 0.3
+  pullValue: 1
   duration: 3
+  isAnimate: 0
+  radiusOfEffectList: []
 --- !u!43 &834976203
 Mesh:
   m_ObjectHideFlags: 0
