@@ -6,6 +6,9 @@ namespace Notion.Unity
 {
     public class BrainwavesPowerByBandHandler : IMetricHandler
     {
+        //DZ
+        public DreamMesh dreamMesh;
+
         public Metrics Metric => Metrics.Brainwaves;
         public string Label => "powerByBand";
 
@@ -30,6 +33,31 @@ namespace Notion.Unity
 
             Debug.Log(_builder.ToString());
             _builder.Clear();
+
+            //PrintData(powerByBand.Data);
+            DataToMesh(powerByBand.Data);
+            
+        }
+
+        //DZ
+        //for testing
+        private void PrintData(PowerByBandData dt)
+        {
+            foreach (decimal item in dt.Delta)
+            {
+                Debug.Log(item);
+            }
+        }
+
+        //DZ
+        //for handling mesh deformation
+        private void DataToMesh(PowerByBandData dt)
+        {
+            //check if dreamMesh is assigned by NotionTester
+            if (dreamMesh != null)
+            {
+                dreamMesh.MorphMesh();
+            }
         }
     }
 }

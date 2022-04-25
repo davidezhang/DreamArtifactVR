@@ -7,6 +7,9 @@ namespace Notion.Unity.Example
 {
     public class NotionTester : MonoBehaviour
     {
+        public DreamMesh dreamMesh;
+
+
         [SerializeField]
         private Device _device;
 
@@ -191,8 +194,12 @@ namespace Notion.Unity.Example
         public void SubscribePowerByBand()
         {
             if (!_notion.IsLoggedIn) return;
-            _notion.Subscribe(new BrainwavesPowerByBandHandler());
+            BrainwavesPowerByBandHandler pBBHandler = new BrainwavesPowerByBandHandler();
+            _notion.Subscribe(pBBHandler);
             Debug.Log("Subscribed to power by band");
+
+            //DZ
+            pBBHandler.dreamMesh = dreamMesh;
         }
 
         private async void OnDisable()

@@ -206,6 +206,14 @@ public class DreamMesh : MonoBehaviour
         return nMesh;
     }
 
+    //DZ
+    // for testing pBB function call
+    public void MorphMesh()
+    {
+        Debug.Log("CALL SUCCESS");
+    }
+
+
     #region HELPER FUNCTIONS
 
     static float LinearFalloff(float dist, float inRadius)
