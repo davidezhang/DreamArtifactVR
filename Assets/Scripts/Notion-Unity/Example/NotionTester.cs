@@ -34,6 +34,10 @@ namespace Notion.Unity.Example
         [SerializeField]
         Button _buttonSubscribeKinesis;
 
+        //DZ
+        [SerializeField]
+        Button _buttonSubscribePowerByBand;
+
         [SerializeField]
         Text _textKinesisProbability;
 
@@ -74,6 +78,9 @@ namespace Notion.Unity.Example
             _buttonSubscribeRawBrainwaves.onClick.AddListener(() => SubscribeBrainwaves());
             _buttonSubscribeAccelerometer.onClick.AddListener(() => SubscribeAccelerometer());
             _buttonSubscribeKinesis.onClick.AddListener(() => SubscribeKinesis(kinesisLabel: "leftArm"));
+
+            //DZ
+            _buttonSubscribePowerByBand.onClick.AddListener(() => SubscribePowerByBand());
         }
 
         private void SetButtonStates()
@@ -90,6 +97,9 @@ namespace Notion.Unity.Example
             _buttonSubscribeAccelerometer.interactable = _notion.IsLoggedIn;
             _buttonSubscribeKinesis.interactable = _notion.IsLoggedIn;
             _textKinesisProbability.text = _notion.IsLoggedIn ? string.Empty : "[KINESIS PROBABILITY]";
+
+            //DZ
+            _buttonSubscribePowerByBand.interactable = _notion.IsLoggedIn;
         }
 
         public async void Login()
@@ -175,6 +185,14 @@ namespace Notion.Unity.Example
                     _textKinesisProbability.text = $"{kinesisLabel} : {probability}";
                 }
             });
+        }
+
+        //DZ
+        public void SubscribePowerByBand()
+        {
+            if (!_notion.IsLoggedIn) return;
+            _notion.Subscribe(new BrainwavesPowerByBandHandler());
+            Debug.Log("Subscribed to power by band");
         }
 
         private async void OnDisable()

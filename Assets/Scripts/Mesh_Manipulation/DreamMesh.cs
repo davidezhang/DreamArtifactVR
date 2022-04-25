@@ -63,7 +63,7 @@ public class DreamMesh : MonoBehaviour
 
     public float radiusOfEffect = 0.3f; //1 
     public float pullValue = 0.3f; //2
-    public float duration = 1.2f; //3
+    public float duration; //3
     int currentIndex = 0; //4
     bool isAnimate = false;
     float startTime = 0f;
@@ -140,6 +140,15 @@ public class DreamMesh : MonoBehaviour
             {
                 StartDisplacement();
             }
+            else if (currentIndex == selectedIndices.Count)
+            {
+                currentIndex = 0;
+
+                //update mesh vertex positions for next round of morphing
+                originalVertices = meshFilter.mesh.vertices;
+                StartDisplacement();
+            }
+
             else //7
             {
                 originalMesh = GetComponent<MeshFilter>().mesh;
