@@ -56,7 +56,13 @@ namespace Notion.Unity
             //check if dreamMesh is assigned by NotionTester
             if (dreamMesh != null)
             {
-                dreamMesh.MorphMesh();
+                //algorithm that maps power by band data to mesh parameters
+                foreach (decimal item in dt.Delta)
+                {
+                    dreamMesh.MorphMesh(item);
+                }
+
+                
             }
         }
     }

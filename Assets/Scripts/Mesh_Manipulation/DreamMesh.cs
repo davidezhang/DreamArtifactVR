@@ -208,9 +208,9 @@ public class DreamMesh : MonoBehaviour
 
     //DZ
     // for testing pBB function call
-    public void MorphMesh()
+    public void MorphMesh(decimal item)
     {
-        Debug.Log("CALL SUCCESS");
+        Debug.Log(item);
     }
 
 
