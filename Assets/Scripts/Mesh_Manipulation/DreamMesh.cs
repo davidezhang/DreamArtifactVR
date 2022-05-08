@@ -35,6 +35,15 @@ using System.Collections.Generic;
 
 public class DreamMesh : MonoBehaviour
 {
+    //DZ
+    //to call and set box size
+    public VFXUpdateSDF vfx;
+
+    //DZ
+    //To select person profile
+    public string inputName;
+    public DataManager dataManager;
+
     Mesh originalMesh;
     Mesh clonedMesh;
     MeshFilter meshFilter;
@@ -78,10 +87,32 @@ public class DreamMesh : MonoBehaviour
     void Start()
     {
         Init();
+
+        //TEST
+        //Debug.Log("NUMBERSSS");
+        //Debug.Log(originalMesh.vertices.Length);
     }
 
     public void Init()
     {
+        //DZ Check Data profile
+        
+        if (dataManager.LoadData(inputName) == null)
+        {
+            //if new person, create vertices profile
+            //creaet list with 8 random numbers
+            List<int> newList = createSelectedList();
+            PersonVerticesData vData = new PersonVerticesData(newList, inputName);
+            dataManager.SaveData(vData);
+            selectedIndices = newList;
+        } else
+        {
+            PersonVerticesData vData = dataManager.LoadData(inputName);
+            selectedIndices = vData.selectedIndices;
+        }
+        
+
+
         meshFilter = GetComponent<MeshFilter>();
         isMeshReady = false;
 
@@ -120,6 +151,17 @@ public class DreamMesh : MonoBehaviour
             //StartDisplacement();
         }
 
+    }
+
+    private List<int> createSelectedList()
+    {
+        List<int> newList = new List<int>();
+        for (int i = 0; i < 8; i++)
+        {
+            newList.Add(UnityEngine.Random.Range(1, 515));
+        }
+        return newList;
+        
     }
 
     public void StartDisplacement()
@@ -191,9 +233,16 @@ public class DreamMesh : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(translate);
             Matrix4x4 m = Matrix4x4.TRS(translate, rotation, Vector3.one);
             modifiedVertices[i] = m.MultiplyPoint3x4(currentVertexPos);
+
+            //DEBUG
+            Debug.Log("force: " + force + "\n");
+            Debug.Log("radius: " + radius);
         }
         originalMesh.vertices = modifiedVertices; //7
         originalMesh.RecalculateNormals();
+
+        //increase box size
+        //vfx.IncreaseBoxSize();
     }
 
     public void ClearAllData()

@@ -41,6 +41,9 @@ public class DreamMeshInspector : Editor
     private Transform handleTransform;
     private Quaternion handleRotation;
 
+    //DZ
+    private ObjExporter objExporter;
+
     void OnSceneGUI()
     {
         mesh = target as DreamMesh;
@@ -110,12 +113,21 @@ public class DreamMeshInspector : Editor
             mesh.ClearAllData();
         }
 
-        if (!mesh.isEditMode && mesh.isMeshReady)
+        //if (!mesh.isEditMode && mesh.isMeshReady)
+        if (!mesh.isEditMode)
         {
-            string path = "Assets/Prefabs/CustomHeart.prefab"; //1
+            
 
             if (GUILayout.Button("Save Mesh"))
             {
+
+                //string path = "Assets/Prefabs/CustomHeart.prefab"; //1
+                //DZ: save and name each mesh artifact
+                string ObjPath = "Assets/SavedMeshes/" + mesh.inputName + "_" + System.DateTime.Now.ToString("yyyyMMddHHmmssfff" + ".obj");
+                string path = "Assets/Prefabs/" + mesh.inputName + "_" + System.DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".prefab";
+
+
+                /*
                 mesh.isMeshReady = false;
                 Object prefabToInstantiate =
                     AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)); //2
@@ -139,6 +151,10 @@ public class DreamMeshInspector : Editor
                 gameObj.GetComponentInChildren<MeshFilter>().mesh = prefabMesh; //5
                 PrefabUtility.SaveAsPrefabAsset(gameObj, path); //6
                 Object.DestroyImmediate(gameObj); //7
+                */
+
+                //DZ Export as OBJ
+                ObjExporter.MeshToFile(mesh.GetComponent<MeshFilter>(), ObjPath);
             }
         }
 
