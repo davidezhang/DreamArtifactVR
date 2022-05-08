@@ -42,6 +42,14 @@ public class VFXUpdateSDF : MonoBehaviour
         m_VFX.SetVector3("acceleration", accelVector);
     }
 
+    public void IncreaseBoxSize()
+    {
+        Vector3 currSize = sizeBox;
+        Vector3 newSize = new Vector3(currSize.x+1f, currSize.y+1f, currSize.z+1f);
+        sizeBox = newSize;
+        m_VFX.SetVector3("BoxSize", newSize);
+    }
+
     void OnDestroy()
     {
         if (m_Baker != null)
