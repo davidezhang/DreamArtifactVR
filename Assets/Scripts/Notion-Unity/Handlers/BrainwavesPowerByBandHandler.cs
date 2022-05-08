@@ -76,13 +76,14 @@ namespace Notion.Unity
                         logValue = 1;
                     }
 
-                    Debug.Log(logValue);
+                    //Debug.Log(logValue);
 
                     float mappedValue = Remap(logValue, _lower, _upper, 0f, 1f);
 
                     //send mapped value and index (corresp. to vertex index) to DreamMesh.cs
                     //set radiusEffectList values
-                    dreamMesh.radiusOfEffectList[i] = logValue / 20;
+                    //dreamMesh.radiusOfEffectList[i] = logValue / 20;
+                    dreamMesh.radiusOfEffectList[i] = logValue / 10;
                     //dreamMesh.MorphMesh(dt.Delta[i]);
 
                 }
