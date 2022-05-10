@@ -38,6 +38,7 @@ public class DreamMesh : MonoBehaviour
     //DZ
     //to call and set box size
     public VFXUpdateSDF vfx;
+    private AudioSource growthAudio;
 
     //DZ
     //To select person profile
@@ -110,7 +111,9 @@ public class DreamMesh : MonoBehaviour
             PersonVerticesData vData = dataManager.LoadData(inputName);
             selectedIndices = vData.selectedIndices;
         }
-        
+
+        //DZ Assign AudioSource for growth
+        growthAudio = GetComponent<AudioSource>();
 
 
         meshFilter = GetComponent<MeshFilter>();
@@ -169,6 +172,13 @@ public class DreamMesh : MonoBehaviour
         targetVertex = originalVertices[selectedIndices[currentIndex]]; //1
         startTime = Time.time; //2
         //isAnimate = true;
+
+        //DZ play audio
+        if (!growthAudio.isPlaying)
+        {
+            growthAudio.Play();
+        }
+
     }
 
     protected void FixedUpdate() //1
@@ -185,9 +195,16 @@ public class DreamMesh : MonoBehaviour
             Vector3 targetVertexPos =
                 meshFilter.transform.InverseTransformPoint(targetVertex);
             DisplaceVertices(targetVertexPos, pullValue, radiusOfEffectList[currentIndex]);
+            
+            
+            
         }
         else //5
         {
+            //DZ stop growth audio
+            growthAudio.Stop();
+
+
             currentIndex++;
             if (currentIndex < selectedIndices.Count) //6
             {
