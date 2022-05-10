@@ -210,6 +210,11 @@ namespace Notion.Unity.Example
             pBBHandler.dreamMesh = dreamMesh;
             //start displacement only when it is subscribing to data
             pBBHandler.dreamMesh.StartDisplacement();
+            
+            //disable button to hide it
+            _buttonSubscribePowerByBand.gameObject.SetActive(false);
+            _buttonSubscribeAccelerometer.gameObject.SetActive(false);
+            _buttonLogin.gameObject.SetActive(false);
         }
 
         private async void OnDisable()
